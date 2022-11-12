@@ -6,7 +6,7 @@ var snailIsSmashed = false;
 // To make true final
 var doorFinal = false;
 var cubeFinal = false;
-var lookedUp =  false;
+var lookedUp  = false;
 
 
 function callByName(functionName) {
@@ -37,7 +37,7 @@ async function showStart() {
 
 		+ "O caracol é tão lento que parece estar parado, você só acha que ele está se movendo, pelo seu barulho gosmento, tão imperceptivel que só da para escutar por causa do silêncio insurdecedor da sala e seu movimento de um criatura imível tentando se locomover.\n"
 		+ "Por último, na sua direita  um olho gigante bem no centro da parede, você não tinha notado sua presença até então, mas desde o começo tem sentido que algo estava te observando, ele não é grande o suficiente para cobrir ou chegar à extremidade da parede, dá para se dizer que sua córnea é do tamanho de um prato."
-	,10);
+	,30);
 
 	await checkAround();
 }
@@ -67,7 +67,7 @@ async function checkAround() {
 		+ eye + " te observando à sua direita, o cubo atrás de você, " + snail + " à sua esquerda e " + door + " à sua frente.\n"
 		+ "Nenhuma janela ou passagem secreta aparente.\n\n"
 		+ "Você tem: "+inventory+"\n"
-	,10);
+	,30);
 
 	await printSeparator();
 }
@@ -82,21 +82,21 @@ async function checkEye() {
 	,30);
 
 
-	await showText("\n\nPrimeiro passo.\n", 300);
+	await showText("\n\nPrimeiro passo.\n", 100);
 	await showText(
 		"Você avança olhando para o olho.\n" 
 		+ "Você não gosta muito de olhar para ele, a sensação de estar sendo vigiado é horrível, ainda mais por um olho gigante preso na parede."
 	,30);
 
 
-	await showText("\n\nSegundo Passo.\n", 300);
+	await showText("\n\nSegundo Passo.\n", 100);
 	await showText(
 		"Você da seu segundo passo.\n"
 		+ "Só porque estou indo em direção a ele, não significa que preciso necessariamente encarar."
 	,30);
 
 
-	await showText("\n\nTerceiro Passo.\n", 300);
+	await showText("\n\nTerceiro Passo.\n", 100);
 	
 
 	if(keyNearEye) {
@@ -117,33 +117,33 @@ async function checkEye() {
 	,30);
 
 
-	await showText("\n\nQuarto Passo.\n", 300);
+	await showText("\n\nQuarto Passo.\n", 100);
 	await showText("De quem é esse olho? Um gigante? Por que um gigante estaria me observando?", 30);
 
 
-	await showText("\n\nQuinto Passo.\n", 300);
+	await showText("\n\nQuinto Passo.\n", 100);
 	await showText("Parece que estou sendo violado, essa sensação de estar sempre sendo vigiado é quase como uma violação.", 30);
 
 
-	await showText("\n\nSexto Passo.\n", 300);
+	await showText("\n\nSexto Passo.\n", 100);
 	await showText("Parece que ele está olhando dentro de mim, no meu subconsciente e enquanto está lá dentro ele me julga, onde ele mais tem motivos para me julgar.", 30);
 
 
-	await showText("\n\nSétimo Passo.\n", 300);
+	await showText("\n\nSétimo Passo.\n", 100);
 	await showText(
 		"Parando pra pensar, por que parece que quanto mais eu ando, mais longe ele fica?\n"
 		+ "Será a falta de noção de distância que tenho em relação a ele, ou coisa parecida? E se tivesse algo que pudesse me dar esse sentido de distância?"
 	,30);
 
 
-	await showText("\n\nOitavo Passo.\n", 300);
+	await showText("\n\nOitavo Passo.\n", 100);
 	await showText("Eu não gosto disso, além de ter um olho que me observa como uma câmera de segurança eu também não consigo chegar até ele?", 30);
 
 
-	await showText("\n\nNono Passo.\n", 300);
+	await showText("\n\nNono Passo.\n", 100);
 	await showText("Acho melhor eu voltar... Quanto mais eu ando... Mais longe do olho pareço estar. \n\nVocê da ", 30);
 
-	await showText("um... Dois... Três passos.\n", 300);
+	await showText("um... Dois... Três passos.\n", 100);
 	await showText("Você chega ao centro da sala novamente. Você olha para trás e o olho continua a lhe observar, como sempre esteve fazendo desde o ínicio.", 30);
 	
 
@@ -197,9 +197,9 @@ async function touchCube() {
 		+ "Acima do medo, ansiedade, desconfiança, incerteza e da sua intuição, sua curiosidade é o que prevalece, você estende sua mão e a leva em direção ao vazio.\b\b"
 		+ "Será que minha mão vai só atravessar? Será que se eu tocar vai dar choque ou machucar? Se minha mão atravessar e isso for realmente um abismo eu vou cair? Algum ser cósmico que vive no vazio vai comer minha mão? O que vai acontecer comigo?\n"
 		+ "Foi a curiosidade que levou o ser humano ao o que ele é hoje, a curiosidade tem movido o conhecimento, o saber, a ciência, a descobrir novas coisas, a ser mais inteligente e"
-	,50);
+	,30);
 
-	await showText("... Sim... É um cubo.\n\n", 300);
+	await showText("... Sim... É um cubo.\n\n", 100);
 	
 	await showText(
 		"Antes que você complete seu pensamento sua mão já chegou ao cubo sem que você percebesse.\n"
@@ -208,7 +208,7 @@ async function touchCube() {
 		+ "Você continua tocando o cubo por causa dessa força que lhe atrai a toca-lo e o sentimento de vazio cresce dentro de ti. Ficar perto daquele cubo não é bom para sua sanidade, o sentimento de vazio cresce... "
 	,30);
 
-	await showText("Te consumindo\n", 300);
+	await showText("Te consumindo\n", 100);
 	
 	await showText("Você se sente um só com o cubo mais e mais ", 200);
 
@@ -278,13 +278,18 @@ async function touchSnail() {
 
 async function attackSnail() {
 
+	if(snailIsSmashed) {
+		await impossibleAction();
+		return
+	}
+
 	await showText(
 		"Você sente uma vontade, uma coisa que você nunca sentiu antes, uma vontade subita de acabar com a vida daquele caracol insignificante.\n"
 		+ "Sua existência te irrita sem motivo aparente. Ele tenta andar mesmo sabendo que não vai a lugar nenhum. Por que ele ainda tenta? De onde vem essa vontade? Por que ele faz isso? Esse caracol é tão estúpido.\n"
 		+ "Ele vai acabar morrendo mesmo, eu posso só acabar logo com isso... "
 	,30);
 
-	await showText("Você se enche de vontade e esmaga o caracol inocente, que não te fez mal algum, apenas porque você pode.\n\n", 100);
+	await showText("Você se enche de vontade e esmaga o caracol inocente, que não te fez mal algum, apenas porque você pode.\n\n", 50);
 
 	await showText(
 		"Quando você tira o pé e olha para o que deveria ser uma mistura de gosma e cacos da casca do que um dia foi um caracol, você na verdade vê uma poça de sangue, junto de restos que se assemelham a carne e tripas, não parece ser um caracol.\n"
@@ -298,6 +303,10 @@ async function attackSnail() {
 	await printSeparator();
 }
 
+async function eatSnail() {
+	await showText("Por que eu faria isso? Quem que come um troço desses? Frânces ok, mas por que EU faria isso? Só um idiota pra pensar uma coisa dessas.", 10);
+	await printSeparator();
+}
 
 
 // Door Actions
@@ -326,8 +335,8 @@ async function checkDoor() {
 	await showText(
 		"Estou preso em algum tipo de salas infinitas que tenho que descobrir o enigma de cada para atravessa-las para que a cada porta que eu atravesse eu perca as esperanças de que a próxima será a saida e então eu comece a enlouquecer mais e mais, a cada porta que passa...\n"
 		+ "Até eu morrer ou nunca morrer, já que eu posso não sentir fome, sede ou qualquer outra necessidade fisiologica."
-	,20);
-	await showText("Talvez isso seja o inferno... Um julgamento, um preço a pagar pelos meus pecados, uma infinidade de salas que me fazem perder a esperança de um dia sair... Até eu beirar a sanidade... Ou talvez eu só esteja pensando demais nisso.", 50);
+	,30);
+	await showText("Talvez isso seja o inferno... Um julgamento, um preço a pagar pelos meus pecados, uma infinidade de salas que me fazem perder a esperança de um dia sair... Até eu beirar a sanidade... Ou talvez eu só esteja pensando demais nisso.", 30);
 
 	await printSeparator();
 }
@@ -338,10 +347,10 @@ async function useDoor() {
 	// Dor alredy open
 	if(!doorIsOpen && !haveKey) {
 		await showText(
-				"Você tenta girar a maçaneta da porta, só porque ela está fechada não significa que está trancada, mas nesse caso ela está trancada sim.\n"
-				+ "Você até tenta múltiplas vezes girar a maçaneta, como se magicamente na próxima tentativa ela fosse estar aberta.\n\n"
-				+ "\"A definição de insanidade é repitir a mesma ação múltiplas vezes esperando que o resultado será diferente.\"\n"
-				+ "Talvez você esteja perdendo a sanidade."
+			"Você tenta girar a maçaneta da porta, só porque ela está fechada não significa que está trancada, mas nesse caso ela está trancada sim.\n"
+			+ "Você até tenta múltiplas vezes girar a maçaneta, como se magicamente na próxima tentativa ela fosse estar aberta.\n\n"
+			+ "\"A definição de insanidade é repitir a mesma ação múltiplas vezes esperando que o resultado será diferente.\"\n"
+			+ "Talvez você esteja perdendo a sanidade."
 		,30);
 		
 		await printSeparator();
@@ -353,12 +362,12 @@ async function useDoor() {
 			+ "Você está de frente para a porta, enquanto imagina o que pode ter atrás dela, você coloca a chave na fechadura, ela parece encaixar bem, com certeza é a chave da porta, você gira e a porta faz um barulho *clack*, parece que está aberta, seu coração acelera, você está ansioso para descobrir o que tem atrás da porta, você coloca a mão na maçaneta e abre... "
 		,30);
 
-		await showText("Escuridão... Vazio... Abismo... É o que você vê.\n", 200);
+		await showText("Escuridão... Vazio... Abismo... É o que você vê.\n", 100);
 
 		await showText(
 			"As janelas não estavam cobertas, elas estavam mostrando o que tinha atrás da porta.\n\n"
 			+ "Não pode ser? É isso? Vazio? Eu vou cair se eu entrar? Ou será que só está escuro? O que tem ai dentro, eu quero descobrir!"
-		,50);
+		,30);
 
 
 
@@ -382,10 +391,10 @@ async function useDoor() {
 	await showText(
 		"Na sua direita, o olho na parede, atrás, o vazio, você parece ter vindo dali. Não foram as luzes que se acenderam... Foi a transição de sair da escuridão irrefletivel para a luz. Na frente outra porta e na esquerda... Uma parede. Você não está no centro, você está na esquerda, onde o caracol deveria estar. Tudo nessa sala parece estar tão grande, como se você tivesse diminuido de tamanho.\n\n"
 		+ "Você se vira correr de volta para a escuridão, porque você sabe que se chegar nele e andar um pouco, você pode voltar para sua sala, a sala do seu tamanho. Você fica de costas para a porta e de frente para o vazio, ele parece tão longe.\n"
-	,50);
+	,30);
 
-	await showText("Você corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, sem sair do lugar.\n\n", 75);
-	await showText("Até que você percebe algo gigante se aproximando de você por cima, uma escuridão imensa está prestes a te esmagar, o desespero te consome, o pânico, o medo a incerteza. Você orre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre até que de repente... ", 50);
+	await showText("Você corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, sem sair do lugar.\n\n", 30);
+	await showText("Até que você percebe algo gigante se aproximando de você por cima, uma escuridão imensa está prestes a te esmagar, o desespero te consome, o pânico, o medo a incerteza. Você orre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre, corre até que de repente... ", 30);
 
 
 	doorFinal = true;
@@ -418,6 +427,19 @@ async function checkUp() {
 	await printSeparator();
 }
 
+async function useUp() {
+	await showText(
+		"Você tenta jogar a chave na lâmpada, mas por mais esforço que você fassa, por algum motivo a chave nunca chega a tocar o teto. Isso me faz pensar na torre de babel, nós tentando chegar a luz, que poderia ser uma representação divina, ele só está lá, iluminando mas nunca fazendo nada além de iluminar, só esperando que nós façamos algo."
+		+ "Por que ele não faz algo? Lâmpada estúpida"
+	,30);
+}
+
+async function eatUp() {
+	await showText("Mesmo se eu quisesse fazer isso, não tenho como alcançar, além do mais, eu não sinto fome, consequentemente não sinto vontade de comer. Esses pensamentos invonluntários estão começando a me pertubar.",30)
+	await printSeparator();
+
+}
+
 async function checkKey() {
 	if(!haveKey) {
 		await impossibleAction();
@@ -433,7 +455,15 @@ async function checkKey() {
 	await printSeparator();
 }
 
-async function checkFloor() {
+async function eatKey() {
+	await showText("Por que tenho a sensação de que alguém tentaria comer isso? É pequeno e cabe na boca, mas não vejo nennhuma situação possível em que...", 30);
+	await showText("Você... Comeu a chave... Por que eu fiz isso?", 50);
+	
+	await printSeparator();
+	haveKey = false
+}
+
+async function checkDown() {
 	await showText("O chão? Nada de especial por aqui, nenhuma passagem secreta, nem escri... Ops... Uma escritura. \"Arzt\", não tenho onde colocar isso, quem é Arzt?", 30);
 	await printSeparator();
 }

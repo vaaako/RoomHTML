@@ -1,5 +1,6 @@
 var showingText = false;
 var instructionsShowed = false;
+var skip = false
 
 async function showText(message, time=10) {
 	let textarea = document.getElementById("contentTextArea");
@@ -10,6 +11,15 @@ async function showText(message, time=10) {
 
 	for(let i=0; i<message.length; i++) {
 		textarea.value += message[i];
+
+		if(skip) {
+			let msg = message.slice(i+1, message.length);
+			textarea.value += msg;
+			skip = false;
+			showingText = false;
+			return;
+		}
+
 		textarea.scrollTop = textarea.scrollHeight; // Scrol down
 		await new Promise(r => setTimeout(r, time)); // >time<
 	}
@@ -21,7 +31,7 @@ async function showText(message, time=10) {
 // In case page is reloaded
 function resetAll() {
 	let textarea = document.getElementById("contentTextArea");
-	textarea.style="font-family: monospace;";
+	textarea.style="font-family: monospace; font-size: 75%;";
 	textarea.value=roomASCII;
 }
 
@@ -67,6 +77,7 @@ async function showInstructions() {
 		+ "Resumindo: Seja objetivo para que suas ações sejam bem interpretadas, tente usar \"Verbo\" + \"adjetivo\"\n"
 		+ "Dica: Cheque/olhe o objeto antes de interagir com ele\n"
 		+ "Recomendo jogar de uma vez só, tendo em vista que não tem função de salvar progresso.\n"
+		+ "USE VERBOS NO INFINITIVO. Exemplo: \"bato\" vira \"bater\""
 		+ "Lembre-se de escrever apenas UMA ação por vez e de que você pode e deve sempre olhar em volta. Bom jogo.\n\n"
 	,5);
 }
@@ -87,7 +98,8 @@ function checkAction(toCheck) {
 			/* Check */  [ "check", "andar", "aproximar", "checar", "chegar", "examinar", "ir ao", "ir ate", "ir até", "ir para", "observar", "olhar", "vasculhar", "ver" ],
 			/* Touch */  [ "touch", "descobrir", "determinar", "examinar", "mexer", "tocar" ],
 			/* Attack */ [ "attack", "acabar", "bater", "chutar", "destruir", "esmagar", "matar", "multilar", "pisar", "socar", "soco", "atacar" ],
-			/* Use */    [ "use", "abrir", "arremessar", "atravessar", "colocar", "entrar", "jogar", "pegar", "por", "segurar", "utilizar", "usar", "passar", "sair" ]
+			/* Use */    [ "use", "abrir", "arremessar", "atravessar", "colocar", "entrar", "jogar", "pegar", "por", "segurar", "utilizar", "usar", "passar", "sair" ],
+			/* Eat */    [ "eat", "comer", "botar na boca"]
 		],
 
 		[
